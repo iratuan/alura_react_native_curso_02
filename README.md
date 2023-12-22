@@ -186,23 +186,25 @@ export default ()=>{
 
 const estilos = StyleSheet.create({
 
-    topo:{
-        backgroundColor:"#e6e6e6",
-        padding:16,
+    topo: {
+        backgroundColor: "#f6f6f6",
+        padding: 16,
     },
-    imagem:{
-        width:70,
-        height:28
-    }, 
-    boasVindas:{
-        marginTop:24,
-        fontSize:26,
-        lineHeight:42,
-        fontWeight:'bold'
-    }, 
-    legenda:{
-        fontSize:16, 
-        lineHeight:26
+    imagem: {
+        width: 70,
+        height: 28
+    },
+    boasVindas: {
+        marginTop: 24,
+        fontSize: 26,
+        lineHeight: 42,
+        fontWeight: 'bold',
+        color:"#464646"
+    },
+    legenda: {
+        fontSize: 16,
+        lineHeight: 26,
+        color:"#a3a3a3"
     }
 
 });
@@ -226,3 +228,77 @@ app
 -------------Index.js
 ```
 
+Crie tambpem um arquivo chamado loadDataService.js dentro da pasta services e coloque o seguinte código dentro.
+
+```javascript
+import produtores from "./produtores";
+import topo from "./topo";
+
+export const loadTopo = () => topo;
+export const loadProdutores = () => produtores;
+```
+
+Esse arquivo será responsável por carregar os dados e servir a nossa aplicação.
+É nesse ponto aqui que faríamos uma integração com uma API externa, por exemplo.
+
+Iremos agora modificar o nosso arquivo Topo.js para utilizar os dados.
+Temos alguns detalhes importantes nesse arquivo.
+
+Atualize o código de Topo.js para ficar como o arquivo abaixo:
+
+```javascript
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text, Image } from "react-native";
+import imgTopo from '../../../../assets/logo.png';
+
+import { loadTopo } from '../../../services/loadDataService';
+
+export default () => {
+
+    const [boasVindas, setBoasVindas] = useState("");
+    const [legenda, setLegenda] = useState("");
+
+    useEffect(() => {
+        setBoasVindas(loadTopo().boasVindas);
+        setLegenda(loadTopo().legenda);
+
+    }, [boasVindas, legenda])
+
+    return <View style={estilos.topo}>
+        <Image source={imgTopo} style={estilos.imagem} />
+        <Text style={estilos.boasVindas}>{boasVindas}</Text>
+        <Text style={estilos.legenda}>{legenda}</Text>
+    </View>
+}
+
+const estilos = StyleSheet.create({
+
+    topo: {
+        backgroundColor: "#f6f6f6",
+        padding: 16,
+    },
+    imagem: {
+        width: 70,
+        height: 28
+    },
+    boasVindas: {
+        marginTop: 24,
+        fontSize: 26,
+        lineHeight: 42,
+        fontWeight: 'bold',
+        color:"#464646"
+    },
+    legenda: {
+        fontSize: 16,
+        lineHeight: 26,
+        color:"#a3a3a3"
+    }
+
+});
+
+```
+
+_____
+### Criando o componente de listagem de produtores
+
+Nessa etapa iremos criar um componente que irá listar os produtores do nosso app.
