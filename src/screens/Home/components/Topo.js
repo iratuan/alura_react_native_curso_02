@@ -13,7 +13,7 @@ export default () => {
         setBoasVindas(loadTopo().boasVindas);
         setLegenda(loadTopo().legenda);
 
-    }, [boasVindas, legenda])
+    }, [])
 
     return <View style={estilos.topo}>
         <Image source={imgTopo} style={estilos.imagem} />
@@ -25,7 +25,7 @@ export default () => {
 const estilos = StyleSheet.create({
 
     topo: {
-        backgroundColor: "#f6f6f6",
+        backgroundColor: "#e6e6e6",
         padding: 16,
     },
     imagem: {

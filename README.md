@@ -262,7 +262,7 @@ export default () => {
         setBoasVindas(loadTopo().boasVindas);
         setLegenda(loadTopo().legenda);
 
-    }, [boasVindas, legenda])
+    }, [])
 
     return <View style={estilos.topo}>
         <Image source={imgTopo} style={estilos.imagem} />
@@ -297,8 +297,110 @@ const estilos = StyleSheet.create({
 });
 
 ```
-
+Note o uso de states e effects para carregar os dados e setar os valores.
+Recomendo uma lida na documentação oficial do react para entender melhor esses pontos. 
+Futuramente, irei atualizar essa documentação para conter um texto explicando em detalhes o uso dos mesmos.
+Eu prometo!
 _____
 ### Criando o componente de listagem de produtores
 
 Nessa etapa iremos criar um componente que irá listar os produtores do nosso app.
+
+No componente Produtores.js, modifique o código para o exemplo abaixo:
+```javascript
+import React, { useEffect, useState } from "react";
+import { Text, SafeAreaView, View, FlatList, Image, StyleSheet } from "react-native";
+import { loadProdutores } from '../../../services/loadDataService';
+
+
+const Item = ({ nome, imagem, distancia, estrelas }) => (
+    <View key={nome}>
+        <Image source={imagem} />
+        <Text>{nome}</Text>
+    </View>
+);
+
+
+
+export default ({topo:Topo}) => {
+
+    const [titulo, setTitulo] = useState("");
+    const [produtores, setProdutores] = useState([]);
+
+    useEffect(() => {
+        setTitulo(loadProdutores().titulo);
+        setProdutores(loadProdutores().lista);
+    }, [])
+
+    const TopoLista = () => {
+        return <>
+        <Topo />
+        <Text style={estilos.titulo}>{titulo}</Text>
+        </>
+    }
+
+    return <>
+        <SafeAreaView>
+            <FlatList
+                ListHeaderComponent={TopoLista}
+                data={produtores}
+                renderItem={({ item }) => <Item
+                    nome={item.nome}
+                    imagem={item.imagem}
+                    distancia={item.distancia}
+                    estrelas={item.estrelas} />}
+                keyExtractor={item => item.nome}
+            />
+        </SafeAreaView>
+    </>
+}
+
+
+const estilos = StyleSheet.create({
+    titulo: {
+        fontSize: 20,
+        lineHeight: 32,
+        marginHorizontal: 16,
+        marginTop: 16,
+        fontWeight: 'bold',
+        color: "#464646"
+    }
+});
+```
+
+Modifique também o arquivo index.js dentro de Home para o código abaixo:
+```javascript
+import React from "react";
+import Topo from "./components/Topo";
+import Produtores from "./components/Produtores";
+
+export default () => {
+    return <Produtores topo={Topo}/>
+}
+```
+
+E o arquivo App.tsx para:
+```javascript
+import React from 'react';
+import Home from './src/screens/Home/Index';
+import { SafeAreaView, StyleSheet } from 'react-native';
+
+export default () => {
+  return (
+    <SafeAreaView style={estilos.tela}>
+      <Home />
+    </SafeAreaView>
+  );
+}
+
+const estilos = StyleSheet.create({
+  tela: {
+    flex: 1
+  }
+});
+```
+
+Isso irá atualizar nosso layout para exibir a lista de produtores, porém, precisamos estilizar a lista para que fique agradável.
+vamos lá?
+_____
+### Estilizando a lista de produtores
