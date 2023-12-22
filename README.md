@@ -122,3 +122,107 @@ export default  () => {
 ```
 Rode novamente o projeto e você terá uma nova tela, exibindo uma imagem, que é a componente Topo que criamos há pouco.
 ______
+
+### Estilizando o componente Topo.js
+Vamos melhorar a apresentação do nosso componente Topo.js, aplicando alguns estilos ao mesmo.
+
+Primeiramente, vamos modificar um pouco o conteúdo do componente, conforme o código abaixo:
+
+```javascript
+import React from "react";
+import {StyleSheet, View, Text, Image } from "react-native";
+import ImgTopo from '../../../../assets/logo.png';
+
+export default ()=>{
+    return<View>
+        <Image source={ImgTopo} />
+        <Text>Olá usuário</Text>
+        <Text>Encontre aqui os melhores produtores</Text>
+    </View>
+}
+```
+Em seguida, iremos criar uma constante que será responsável pela formatação do componente.
+
+Crie o seguinte bloco, no final do arquivo Topo.js
+```javascript
+const estilos = StyleSheet.create({
+
+    topo:{
+        backgroundColor:"#e6e6e6",
+        padding:16,
+    },
+    imagem:{
+        width:70,
+        height:28
+    }, 
+    boasVindas:{
+        marginTop:24,
+        fontSize:26,
+        lineHeight:42,
+        fontWeight:'bold'
+    }, 
+    legenda:{
+        fontSize:16, 
+        lineHeight:26
+    }
+
+});
+```
+
+A aparencia do seu arquivo final deve ser algo como:
+
+```javascript
+import React from "react";
+import {StyleSheet, View, Text, Image } from "react-native";
+import ImgTopo from '../../../../assets/logo.png';
+
+export default ()=>{
+    return<View style={estilos.topo}>
+        <Image source={ImgTopo} style={estilos.imagem}/>
+        <Text style={estilos.boasVindas}>Olá usuário</Text>
+        <Text style={estilos.legenda}>Encontre aqui os melhores produtores</Text>
+    </View>
+}
+
+const estilos = StyleSheet.create({
+
+    topo:{
+        backgroundColor:"#e6e6e6",
+        padding:16,
+    },
+    imagem:{
+        width:70,
+        height:28
+    }, 
+    boasVindas:{
+        marginTop:24,
+        fontSize:26,
+        lineHeight:42,
+        fontWeight:'bold'
+    }, 
+    legenda:{
+        fontSize:16, 
+        lineHeight:26
+    }
+
+});
+```
+____
+### Mockando os dados
+Precisaremos agora mockar algumas informações para que elas não fiquem estáticas no código.
+Inciaremos baixando [esses arquivos](https://github.com/alura-cursos/react-native-utilizando-e-criando-hooks/tree/Aula2/src/mocks) e salvando dentro de um diretório chamado services, que deverá ficar dentro de src.
+Assim, a estrutura de pastas deve ficar parecida com isso aqui.
+
+```
+app
+-- src
+-----services
+---------produtores.js
+---------topo.js
+-----screens
+---------Home
+-------------components
+------------------Topo.js
+-------------Index.js
+```
+
