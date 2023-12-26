@@ -400,7 +400,9 @@ const estilos = StyleSheet.create({
 });
 ```
 
-Isso irá atualizar nosso layout para exibir a lista de produtores, porém, precisamos estilizar a lista para que fique agradável.
-vamos lá?
+Isso irá atualizar nosso layout para exibir a lista de produtores.
 _____
-### Estilizando a lista de produtores
+### Dicas finais.
+Nosso projeto final está levemente diferente do abordado até aqui.
+Recomendo que você baixe o projeto todo, acompanhe o tutorial e compare os resultados finais.
+Grande abraço e até a próxima.

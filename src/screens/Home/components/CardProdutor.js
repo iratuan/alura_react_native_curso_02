@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { StyleSheet, Text, Image, View, Dimensions, TouchableOpacity } from "react-native";
 import Estrelas from "./Estrelas";
 
 const _width = Dimensions.get('window').width;
 
 export default ({ nome, imagem, distancia, estrelas }) => {
-    const [selecionado, setSelecionado] = useState(false)
-
-    let estrelasList = [];
-
+    //const [selecionado, setSelecionado] = useState(false)
+    const [selecionado, inverterSelecao] = useReducer((selecionado)=>!selecionado, false)
     return <>
         <TouchableOpacity 
         style={estilos.container}
-        onPress={()=>{setSelecionado(!selecionado)}}>
+        onPress={inverterSelecao}>
             <Image source={imagem} style={estilos.imagem} accessibilityLabel={nome} />
             <View style={estilos.containerTituloEstrelas}>
                 <Text style={estilos.titulo}>{nome}</Text>

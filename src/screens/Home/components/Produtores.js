@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useProdutores from "../hooks/useProdutores";
 import { Text, SafeAreaView, View, FlatList, Image, StyleSheet } from "react-native";
-import { loadProdutores } from '../../../services/loadDataService';
 import CardProdutor from "./CardProdutor";
 
 
-
-
-
 export default ({topo:Topo}) => {
-
-    const [titulo, setTitulo] = useState("");
-    const [produtores, setProdutores] = useState([]);
-
-    useEffect(() => {
-        setTitulo(loadProdutores().titulo);
-        setProdutores(loadProdutores().lista);
-    }, [])
+    const [titulo, produtores] = useProdutores();   
 
     const TopoLista = () => {
         return <>

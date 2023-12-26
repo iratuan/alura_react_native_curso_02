@@ -14,7 +14,7 @@ export default ({
     const RenderEstrelas = () => {
         const estrelas = [];
         for (let i = 0; i < 5; i++) {
-           estrelas.push(<Estrela 
+           estrelas.push(<Estrela key={i}
            onPress={()=> setQuantidade(i + 1)}
            desabilitada={!editavel}
            isGrande={isGrande}
