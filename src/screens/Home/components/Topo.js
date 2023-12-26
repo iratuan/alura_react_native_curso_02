@@ -27,6 +27,7 @@ const estilos = StyleSheet.create({
     topo: {
         backgroundColor: "#e6e6e6",
         padding: 16,
+        margin:0
     },
     imagem: {
         width: 70,

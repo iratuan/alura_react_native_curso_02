@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Text, SafeAreaView, View, FlatList, Image, StyleSheet } from "react-native";
 import { loadProdutores } from '../../../services/loadDataService';
+import CardProdutor from "./CardProdutor";
 
 
-const Item = ({ nome, imagem, distancia, estrelas }) => (
-    <View key={nome}>
-        <Image source={imagem} />
-        <Text>{nome}</Text>
-    </View>
-);
 
 
 
@@ -34,12 +29,12 @@ export default ({topo:Topo}) => {
             <FlatList
                 ListHeaderComponent={TopoLista}
                 data={produtores}
-                renderItem={({ item }) => <Item
+                renderItem={({ item }) => <CardProdutor
                     nome={item.nome}
                     imagem={item.imagem}
                     distancia={item.distancia}
                     estrelas={item.estrelas} />}
-                keyExtractor={item => item.nome}
+                keyExtractor={item => item.nome}                
             />
         </SafeAreaView>
     </>
@@ -54,7 +49,5 @@ const estilos = StyleSheet.create({
         marginTop: 16,
         fontWeight: 'bold',
         color: "#464646"
-    },
-
-
+    }
 });
